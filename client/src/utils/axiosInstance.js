@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-
 const axiosInstance = axios.create({
-    baseURL :'http://localhost:3000/api'
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`
 })
+
+console.log("Axios Base URL:", axiosInstance.defaults.baseURL)
 
 export default axiosInstance
