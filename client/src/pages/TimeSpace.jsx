@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
-import { BringToFront, Circle, Star } from 'lucide-react';
+import { ArrowLeft, BringToFront, Circle, Star } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const TimeSpace = () => {
   const [code, setCode] = useState('');
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
   const handleAnalyze = async() => {
     setLoading(true)
     try {
@@ -27,7 +29,14 @@ const TimeSpace = () => {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50 p-8 gap-8 font-sans">
       {/* Input Side */}
+      <title>Time & Space</title>
       <div className="w-full lg:w-1/2 bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+      <button
+          onClick={() => navigate('/')}
+          className="flex items-center text-sm cursor-pointer text-gray-600 hover:text-black transition mb-4"
+        >
+          <ArrowLeft className="w-4 h-4 mr-1 " /> Back
+        </button>
         <h1 className="text-2xl font-bold text-gray-800 mb-1">Code Complexity Analyzer</h1>
         <p className="text-sm text-gray-500 mb-4">Paste your code snippet to analyze time and space complexity</p>
         <textarea

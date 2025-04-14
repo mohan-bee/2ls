@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import axiosInstance from '../utils/axiosInstance'
 import toast from 'react-hot-toast'
-import { Clipboard } from 'lucide-react'
+import { ArrowLeft, Clipboard } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const Base64 = () => {
     const [queryEncode, setQueryEncode] = useState('')
     const [queryDecode, setQueryDecode] = useState('')
     const [result, setResult] = useState('')
+    const navigate = useNavigate()
 
     const handleChangeEncode = async (e) => {
         setQueryEncode(e.target.value)
@@ -33,8 +35,15 @@ const Base64 = () => {
       }
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50 p-8 gap-8 font-sans">
+      <title>Base64 Encoder Decoder</title>
       {/* Input Side */}
       <div className="w-full lg:w-1/2 bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+      <button
+          onClick={() => navigate('/')}
+          className="flex items-center text-sm text-gray-600 cursor-pointer hover:text-black transition mb-4"
+        >
+          <ArrowLeft className="w-4 h-4 mr-1 cursor-pointer" /> Back
+        </button>
         <div>
         <h1 className="text-2xl font-bold text-gray-800 mb-1">Base64 Encode</h1>
         <p className="text-sm text-gray-500 mb-4">Write the text to be encoded</p>

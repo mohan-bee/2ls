@@ -1,30 +1,43 @@
 import React, { useState } from 'react'
 import axiosInstance from '../utils/axiosInstance'
+import { useNavigate } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 
 const JWT = () => {
-    const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y3NDNjODM0ZjBkNmQ0MWY2ZTIwNTMiLCJpYXQiOjE3NDQyNTc5OTIsImV4cCI6MTc0NDg2Mjc5Mn0.nLka2_DRlQyBlLFbGIm1NUK3Q_ter7zr8Rz-xSC_ydQ')
-    const [decode, setDecode] = useState(null)
-    const [error, setError] = useState('')
-    const handleTokenChange = async (e) => {
-        setToken(e.target.value)
+  const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y3NDNjODM0ZjBkNmQ0MWY2ZTIwNTMiLCJpYXQiOjE3NDQyNTc5OTIsImV4cCI6MTc0NDg2Mjc5Mn0.nLka2_DRlQyBlLFbGIm1NUK3Q_ter7zr8Rz-xSC_ydQ')
+  const [decode, setDecode] = useState(null)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+
+  const handleTokenChange = async (e) => {
+    setToken(e.target.value)
+  }
+
+  const handleDecode = async (e) => {
+    try {
+      e.preventDefault()
+      let res = await axiosInstance.post('/jwt/decode', { token, secret: "" })
+      setDecode(res.data)
+      if (!res.data) {
+        setError("Error")
+      }
+    } catch (error) {
+      setError(error.message)
     }
-    const handleDecode = async(e) => {
-       try {
-        e.preventDefault()
-        let res = await axiosInstance.post('/jwt/decode', {token, secret: ""})
-        setDecode(res.data)
-        if(!res.data){
-            setError("Error")
-        }
-        // console.log(decode)
-       } catch (error) {
-        setError(error.message)
-       }
-    }   
+  }
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50 p-8 gap-8 font-sans">
       {/* Input Side */}
+      <title>JWT Decoder</title>
       <div className="w-full lg:w-1/2 bg-white shadow-md rounded-2xl p-6 border border-gray-200">
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center text-sm cursor-pointer text-gray-600 hover:text-black transition mb-4"
+        >
+          <ArrowLeft className="w-4 h-4 mr-1 cursor-pointer" /> Back
+        </button>
+
         <h1 className="text-2xl font-bold text-gray-800 mb-1">JWT Decoder</h1>
         <p className="text-sm text-gray-500 mb-4">Paste your JWT token to decode it</p>
         <textarea
