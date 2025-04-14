@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import axiosInstance from '../utils/axiosInstance'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, BringToFront } from 'lucide-react'
 
 const JWT = () => {
   const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y3NDNjODM0ZjBkNmQ0MWY2ZTIwNTMiLCJpYXQiOjE3NDQyNTc5OTIsImV4cCI6MTc0NDg2Mjc5Mn0.nLka2_DRlQyBlLFbGIm1NUK3Q_ter7zr8Rz-xSC_ydQ')
   const [decode, setDecode] = useState(null)
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleTokenChange = async (e) => {
@@ -15,6 +16,7 @@ const JWT = () => {
 
   const handleDecode = async (e) => {
     try {
+      setLoading(true)
       e.preventDefault()
       let res = await axiosInstance.post('/jwt/decode', { token, secret: "" })
       setDecode(res.data)
@@ -23,6 +25,9 @@ const JWT = () => {
       }
     } catch (error) {
       setError(error.message)
+    }
+    finally{
+      setLoading(false)
     }
   }
 
@@ -46,12 +51,19 @@ const JWT = () => {
           placeholder="Paste JWT token here..."
           className="w-full h-60 resize-none rounded-md border border-gray-300 p-3 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
-        <button
+       {!loading &&  <button
           onClick={handleDecode}
           className="mt-4 w-full cursor-pointer bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800 transition duration-200"
         >
           Decode Token
-        </button>
+        </button>}
+       {loading &&  <button
+          onClick={handleDecode}
+          className="mt-4 w-full cursor-pointer bg-black text-white py-2 rounded-md font-medium hover:bg-gray-800 transition duration-200"
+        >
+          <BringToFront className='animate-spin w-full text-center'/>
+        </button>}
+
       </div>
 
       {/* Output Side */}
