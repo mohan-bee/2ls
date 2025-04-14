@@ -5,13 +5,13 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/api/base64/encode
+  url: http://localhost:3000/api/base64/decode
   body: json
   auth: inherit
 }
 
 body:json {
   {
-    "query": "hello"
+    "query": "aGVsbG8="
   }
 }
