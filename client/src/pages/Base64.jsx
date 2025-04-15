@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 const Base64 = () => {
     const [queryEncode, setQueryEncode] = useState('')
     const [queryDecode, setQueryDecode] = useState('')
-    const [result, setResult] = useState('')
+    const [result, setResult] = useState(' ')
     const navigate = useNavigate()
 
     const handleChangeEncode = async (e) => {
