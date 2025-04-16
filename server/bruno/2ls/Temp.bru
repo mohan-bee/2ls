@@ -1,0 +1,19 @@
+meta {
+  name: Temp
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://emkc.org/api/v2/piston/execute
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {"language":"python","version":"3.10.0","files":[{"name":"main.py","content":"def greet(name):\n return f\"Hello, {name}!\"\n\nprint(greet(\"Piston\"))"}]}
+}
