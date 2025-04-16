@@ -19,6 +19,11 @@ const tools = [
     description: 'Encode your base64 string and decode your hashed string.',
     link: '/base64',
   },
+  {
+    name: 'Python online complier',
+    description: 'A Simple python online compiler',
+    link: '/python',
+  },
   // Add more tools here as needed
 ];
 
