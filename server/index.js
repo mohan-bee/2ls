@@ -6,7 +6,7 @@ require('dotenv').config()
 app.use(express.json())
 
 app.use(cors({
-    origin: process.env.CLIENT_URL
+    origin: '*'
 }))
 app.use('/api/jwt', require('./routes/jwt.route'))
 app.use('/api/base64', require('./routes/base64.route'))
