@@ -25,7 +25,7 @@ const Python = () => {
         files: [{ name: "main.py", content: code }]
       });
 
-      setOutput(response.data.output || response.data.run?.stdout || 'No output');
+      setOutput(response.data.output || response.data.run?.stdout || response.data.run?.stderr);
     } catch (error) {
       toast.error("Something went wrong!");
       setOutput(error.message);
