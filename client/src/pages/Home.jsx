@@ -16,7 +16,7 @@ const tools = [
   },
   {
     name: 'Base64 Encoder and Decoder',
-    description: 'Encode your base64 string and decode your hashed string.',
+    description: 'Encode your base64 string and decode your hashed.',
     link: '/base64',
   },
   {
