@@ -48,7 +48,7 @@ const Python = () => {
         </button>
 
         <h1 className="text-2xl font-bold text-gray-800 mb-1">Python Code Runner</h1>
-        <p className="text-sm text-gray-500 mb-4">Write and run Python code using Monaco editor ! </p>
+        <p className="text-sm text-gray-500 mb-4">Write and run Python code using Monaco editor</p>
 
         <div className="h-[400px] border border-gray-300 rounded-lg overflow-hidden mb-4 p-2 bg-black">
           <Editor
